@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package com.example.android.codelabs.paging.model
+package com.example.android.codelabs.paging.data.model
 
+import com.example.android.codelabs.paging.data.db.tables.Repo
 import java.lang.Exception
 
 /**

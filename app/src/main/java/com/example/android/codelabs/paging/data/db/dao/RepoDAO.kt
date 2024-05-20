@@ -1,12 +1,11 @@
-package com.example.android.codelabs.paging.db
+package com.example.android.codelabs.paging.data.db.dao
 
 import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.android.codelabs.paging.model.Repo
-import retrofit2.http.DELETE
+import com.example.android.codelabs.paging.data.db.tables.Repo
 
 @Dao
 interface RepoDAO {
@@ -19,7 +18,7 @@ interface RepoDAO {
     @Query("Select * FROM repos WHERE `query`=:queryString AND "+ //only select records/repos related specifically to queryString
             "name LIKE :queryString OR description Like :queryString "+
             "ORDER BY stars DESC, name ASC")
-    fun reposByName (queryString:String):PagingSource<Int,Repo>
+    fun reposByName (queryString:String):PagingSource<Int, Repo>
 
     //Clear records in [Repos Table]
     @Query("DELETE FROM repos where `query`=:queryString") //only clear records related specifically to queryString

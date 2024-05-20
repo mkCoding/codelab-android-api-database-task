@@ -16,27 +16,29 @@
 
 package com.example.android.codelabs.paging.ui
 
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import kotlinx.coroutines.flow.collect
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.map
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.example.android.codelabs.paging.Injection
+import com.example.android.codelabs.paging.data.network.NetworkChangeReceiver
 import com.example.android.codelabs.paging.databinding.ActivitySearchRepositoriesBinding
-import com.example.android.codelabs.paging.model.Repo
-import com.example.android.codelabs.paging.model.RepoSearchResult
+import com.example.android.codelabs.paging.ui.adapter.ReposAdapter
+import com.example.android.codelabs.paging.ui.adapter.ReposLoadStateAdapter
+import com.example.android.codelabs.paging.ui.viewmodel.SearchRepositoriesViewModel
+import com.example.android.codelabs.paging.ui.viewmodel.UiAction
+import com.example.android.codelabs.paging.ui.viewmodel.UiModel
+import com.example.android.codelabs.paging.ui.viewmodel.UiState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -47,6 +49,8 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class SearchRepositoriesActivity : AppCompatActivity() {
+
+    lateinit var networkChangeReceiver: NetworkChangeReceiver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,6 +76,23 @@ class SearchRepositoriesActivity : AppCompatActivity() {
             pagingData = viewModel.pagingDataFlow,
             uiActions = viewModel.accept
         )
+
+        //check if internet is connected or not
+        checkOnlineConnection()
+    }
+
+    private fun checkOnlineConnection(){
+        //add code to check internet connection broadcast reciever
+
+        //Initialize and register the network reciever
+        networkChangeReceiver = NetworkChangeReceiver()
+        val filter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        registerReceiver(networkChangeReceiver,filter)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(networkChangeReceiver)
     }
 
     /**

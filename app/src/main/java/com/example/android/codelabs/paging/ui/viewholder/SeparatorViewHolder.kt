@@ -1,4 +1,4 @@
-package com.example.android.codelabs.paging.ui
+package com.example.android.codelabs.paging.ui.viewholder
 
 import android.view.LayoutInflater
 import android.view.View

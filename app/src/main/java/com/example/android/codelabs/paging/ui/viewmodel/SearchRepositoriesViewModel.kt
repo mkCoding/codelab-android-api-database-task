@@ -14,25 +14,17 @@
  * limitations under the License.
  */
 
-package com.example.android.codelabs.paging.ui
+package com.example.android.codelabs.paging.ui.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.distinctUntilChanged
-import androidx.lifecycle.liveData
-import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.insertSeparators
 import androidx.paging.map
-import com.example.android.codelabs.paging.data.GithubRepository
-import com.example.android.codelabs.paging.model.Repo
-import com.example.android.codelabs.paging.model.RepoSearchResult
-import kotlinx.coroutines.Dispatchers
+import com.example.android.codelabs.paging.data.repository.GithubRepository
+import com.example.android.codelabs.paging.data.db.tables.Repo
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -131,7 +123,8 @@ class SearchRepositoriesViewModel(
     private fun searchRepo(queryString: String): Flow<PagingData<UiModel>> =
         //this line below will make a call to API to search through repos based on given query
         repository.getSearchResultStream(queryString).map {pagingData-> pagingData.map {
-            UiModel.RepoItem(it)}}.map {
+            UiModel.RepoItem(it)
+        }}.map {
                 it.insertSeparators{before,after ->
                     if(after == null ){
                         //were at the end of the list

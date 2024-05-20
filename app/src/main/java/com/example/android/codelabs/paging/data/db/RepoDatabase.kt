@@ -1,4 +1,4 @@
-package com.example.android.codelabs.paging.db
+package com.example.android.codelabs.paging.data.db
 
 import android.content.Context
 import androidx.room.Database
@@ -6,17 +6,20 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.android.codelabs.paging.model.Repo
+import com.example.android.codelabs.paging.data.db.dao.RemoteKeysDao
+import com.example.android.codelabs.paging.data.db.dao.RepoDAO
+import com.example.android.codelabs.paging.data.db.tables.RemoteKeys
+import com.example.android.codelabs.paging.data.db.tables.Repo
 
 @Database(
-    entities = [Repo::class,RemoteKeys::class],
+    entities = [Repo::class, RemoteKeys::class],
     version = 2, //migrating to new DB version because of the new 'query' column added to Repo DB
     exportSchema = false
 )
 abstract class RepoDatabase: RoomDatabase() {
 
-    abstract fun reposDao():RepoDAO
-    abstract fun remoteKeysDao():RemoteKeysDao
+    abstract fun reposDao(): RepoDAO
+    abstract fun remoteKeysDao(): RemoteKeysDao
 
     companion object{
         @Volatile

@@ -1,8 +1,9 @@
-package com.example.android.codelabs.paging.ui
+package com.example.android.codelabs.paging.ui.adapter
 
 import android.view.ViewGroup
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
+import com.example.android.codelabs.paging.ui.viewholder.ReposLoadStateViewHolder
 
 class ReposLoadStateAdapter(private val retry: () -> Unit):LoadStateAdapter<ReposLoadStateViewHolder>(){
 

@@ -1,4 +1,4 @@
-package com.example.android.codelabs.paging.ui
+package com.example.android.codelabs.paging.ui.viewholder
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -26,7 +26,7 @@ class ReposLoadStateViewHolder(
         }
 
     companion object{
-        fun create(parent:ViewGroup, retry: () -> Unit):ReposLoadStateViewHolder{
+        fun create(parent:ViewGroup, retry: () -> Unit): ReposLoadStateViewHolder {
             val view = LayoutInflater.from(parent.context).inflate(R.layout.repos_load_state_footer_view_item, parent,false)
             val binding = ReposLoadStateFooterViewItemBinding.bind(view)
             return ReposLoadStateViewHolder(binding,retry)

@@ -1,4 +1,4 @@
-package com.example.android.codelabs.paging.db
+package com.example.android.codelabs.paging.data.db.tables
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

@@ -5,11 +5,11 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
-import com.example.android.codelabs.paging.api.GithubService
-import com.example.android.codelabs.paging.api.IN_QUALIFIER
-import com.example.android.codelabs.paging.db.RemoteKeys
-import com.example.android.codelabs.paging.db.RepoDatabase
-import com.example.android.codelabs.paging.model.Repo
+import com.example.android.codelabs.paging.data.network.GithubService
+import com.example.android.codelabs.paging.data.network.IN_QUALIFIER
+import com.example.android.codelabs.paging.data.db.tables.RemoteKeys
+import com.example.android.codelabs.paging.data.db.RepoDatabase
+import com.example.android.codelabs.paging.data.db.tables.Repo
 import retrofit2.HttpException
 import java.io.IOException
 
